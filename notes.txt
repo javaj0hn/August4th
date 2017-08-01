@@ -1,0 +1,2 @@
+https://stackoverflow.com/questions/25186921/change-row-background-color-based-on-cell-value-datatable
+https://datatables.net/manual/styling/bootstrap
