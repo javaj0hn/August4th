@@ -6,8 +6,7 @@ from conf import config
 
 # Import Project Files
 from August4th import db
-from August4th.output import print_log, time_to_string
-from August4th import application
+#from August4th import application
 
 app = Flask(__name__)
 
@@ -17,9 +16,33 @@ app = Flask(__name__)
 # Routes
 '''
 Index Page
+Allow multiple image & file uploads
 '''
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    if request.method == 'POST':
+        data = dict()
+        file = request.files['file']
+
+        if file and whiteList(file.filename):
+            filename = secure_filename(file.filename)
+            while os.path.exists(os.path.join(config["UPLOAD_FOLDER"], filename)):
+                filename = str(randint(1000,8999)) + '-' + secure_filename(filename)
+            db.uploadFile(filename)
+            file.save(os.path.join(config['UPLOAD_FOLDER'], filename))
+            data["file"] = filename
+            data["url"] = config["DOMAIN"] + "/" + filename
+
+            try:
+                if request.form["source"] == "web":
+                    return render_template('link.html', data=data, page=config["SITE_DATA"])
+            except Exception as e:
+                return json.dumps(data)
+        else:
+            return errorPage(error="This file is not allowed.", code=403)
+
+    elif request.method == 'GET':
+        return render_template('index.html', page=config["SITE_DATA"])
     return render_template('index.html')
 
 '''
