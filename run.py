@@ -50,6 +50,9 @@ Pastebin Page
 '''
 @app.route('/paste', methods=['GET', 'POST'])
 def paste():
+    if request.method == 'POST' and request.form['code']:
+        #db call function
+        return redirect(url_for('showPaste', pasteID=pasteID)
     return render_template('paste.html')
 
 if __name__ == '__main__':
