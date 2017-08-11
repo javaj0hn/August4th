@@ -52,8 +52,21 @@ Pastebin Page
 def paste():
     if request.method == 'POST' and request.form['code']:
         #db call function
-        return redirect(url_for('showPaste', pasteID=pasteID)
+        #Generate random ID
+        ID = 1
+        content = "hello"
+        pType = "PHP"
+        db.add_paste(ID, content, pType)
+        return redirect(url_for('showPaste', ID=ID))
     return render_template('paste.html')
+
+'''
+Show Paste
+'''
+@app.route('/paste/<int:pid>', methods=['GET')
+def showPaste(pid):
+    db.getPaste(pid)
+    return render_template('pasteResults.html')
 
 if __name__ == '__main__':
   app.run(

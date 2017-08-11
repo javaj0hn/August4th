@@ -1,6 +1,6 @@
 config = dict()
 
-config["HOST"] = "localhost"
+config["HOST"] = "199.195.248.107"
 
 # URLS Returned
 config["DOMAIN"] = "localhost"
