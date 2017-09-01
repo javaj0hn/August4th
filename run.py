@@ -63,10 +63,15 @@ def paste():
 '''
 Show Paste
 '''
-@app.route('/paste/<int:pid>', methods=['GET')
-def showPaste(pid):
-    db.getPaste(pid)
-    return render_template('pasteResults.html')
+@app.route('/paste/<int:ID>', methods=['GET'])
+def showPaste(ID):
+    paste = db.getPaste(ID)
+    for p in paste:
+        pid = p[0]
+        content = p[1]
+        type = p[2]
+    print content
+    return render_template('pasteResults.html', pid=pid,content=content,type=type)
 
 if __name__ == '__main__':
   app.run(

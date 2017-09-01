@@ -5,6 +5,16 @@ def connect(target):
     return sqlite3.connect(target)
 
 '''
+Get Paste
+'''
+def getPaste(pid):
+    db = connect('august4th.db')
+    paste = db.execute('SELECT * FROM pastes WHERE pid = ?', (pid,)).fetchall()
+    db.commit()
+    db.close()
+    return paste
+
+'''
 New Paste
 '''
 def add_paste(pid, content, pType):

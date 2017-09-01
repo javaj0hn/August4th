@@ -1,8 +1,40 @@
-{% block title %}New Paste{% endblock %}
-{% block body %}
-  <h2>New Paste</h2>
-  <form action="" method=post>
-    <div class=code><textarea name=code cols=60 rows=18></textarea></div>
-    <p><input type=submit value="New Paste">
-  </form>
+<head>
+<title></title>
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/pasteStyle.css') }}">
+</head>
+ {% block body %}
+<main class="view">
+        <h1 class="title">
+                August4th ~ Paste
+        </h1>
+
+        <div class="window">
+                <div class="window-header">
+                        <div class="action-buttons"></div>
+                        <select class="language">
+                                <option value="javascript" selected>JavaScript</option>
+                                <option value="markup">HTML</option>
+                                <option value="php">PHP</option>
+                        </select>
+                </div>
+				<form action="" method=post>
+                <div class="window-body">
+                        <textarea class="code-input">{{content}}</textarea>
+                        <pre class="code-output">
+                                <code class="language-javascript">
+
+                                </code>
+                        </pre>
+                </div>
+                </form>
+        </div>
+        <input type=submit value="New Paste">
+        <div class="credits">
+                *thanks to <a href="https://twitter.com/leaverou">Lea Verou</a> for <a href="http://prismjs.com/">Prism.js</a>
+        </div>
+</main>
+        {% block javascript %}
+        <!-- jquery and bootstrap and flaskbb.js -->
+        <script src="{{ url_for('static', filename='js/pasteScript.js') }}"></script>
+        {% endblock %}
 {% endblock %}
