@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 from flask import Flask, request, redirect, url_for, send_from_directory, abort, render_template
+import string, random
 
 # Import Configuration
 from conf import config
@@ -11,7 +12,11 @@ from August4th import db
 app = Flask(__name__)
 
 # Functions
-
+'''
+Random ID Generator
+'''
+def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
+    return ''.join(random.choice(chars) for _ in range(size))
 
 # Routes
 '''
@@ -53,8 +58,8 @@ def paste():
     if request.method == 'POST' and request.form['code']:
         #db call function
         #Generate random ID
-        ID = 1
-        content = "hello"
+        ID = id_generator()
+        content = request.form['code']
         pType = "PHP"
         db.add_paste(ID, content, pType)
         return redirect(url_for('showPaste', ID=ID))
@@ -63,7 +68,7 @@ def paste():
 '''
 Show Paste
 '''
-@app.route('/paste/<int:ID>', methods=['GET'])
+@app.route('/paste/<string:ID>', methods=['GET'])
 def showPaste(ID):
     paste = db.getPaste(ID)
     for p in paste:
