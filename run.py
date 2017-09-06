@@ -56,11 +56,10 @@ Pastebin Page
 @app.route('/paste', methods=['GET', 'POST'])
 def paste():
     if request.method == 'POST' and request.form['code']:
-        #db call function
         #Generate random ID
         ID = id_generator()
         content = request.form['code']
-        pType = "PHP"
+        pType = request.form['language']
         db.add_paste(ID, content, pType)
         return redirect(url_for('showPaste', ID=ID))
     return render_template('paste.html')
