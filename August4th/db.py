@@ -22,3 +22,13 @@ def add_paste(pid, content, pType):
     db.execute('INSERT INTO pastes(pid, content, pType) VALUES(?,?,?)', (pid, content, pType))
     db.commit()
     db.close()
+
+'''
+Paste Gallery
+'''
+def getPasteGallery():
+    db = connect('august4th.db')
+    pastes = db.execute('SELECT * FROM pastes')
+    db.commit()
+    #db.close()
+    return pastes
