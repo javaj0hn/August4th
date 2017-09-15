@@ -1,0 +1,19 @@
+<head>
+<title></title>
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/pasteStyle.css') }}">
+</head>
+<main class="view">
+	<h1 class="title">
+		August4th ~ Paste
+		<small>http://{{domain}}/paste/gallery</small>
+	</h1>
+    {% block content %}
+    {% for paste in pastes %}
+    {{paste}}
+    {% endfor %}
+    {% endblock %}
+</main>
+        {% block javascript %}
+        <!-- jquery and bootstrap and flaskbb.js -->
+        <script src="{{ url_for('static', filename='js/pasteScript.js') }}"></script>
+        {% endblock %}
