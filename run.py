@@ -80,6 +80,14 @@ def showPaste(ID):
     domain = config["DOMAIN"]
     return render_template('pasteResults.html', pid=pid,content=content,type=type,domain=domain)
 
+'''
+Paste Gallery
+'''
+@app.route('/paste/gallery', methods=['GET'])
+def pasteGallery():
+    pastes = db.getPasteGallery()
+    return render_template('pasteGallery.html', pastes=pastes)
+
 if __name__ == '__main__':
   app.run(
     port=config["PORT"],
