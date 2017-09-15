@@ -1,10 +1,13 @@
 config = dict()
 
-config["HOST"] = "199.195.248.107"
+config["HOST"] = "localhost"
 
 # URLS Returned
-config["DOMAIN"] = "localhost"
+config["DOMAIN"] = "localhost"  # Without http
 config["PORT"] = 5000
+
+# Website Name
+config["SITENAME"] = "August4th"
 
 # Disable for production use
 config["DEBUG"] = True
