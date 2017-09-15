@@ -59,7 +59,7 @@ def paste():
         #Generate random ID
         ID = id_generator()
         content = request.form['code']
-        pType = request.form['language']
+        pType = "PHP"
         db.add_paste(ID, content, pType)
         return redirect(url_for('showPaste', ID=ID))
     return render_template('paste.html')
@@ -74,8 +74,11 @@ def showPaste(ID):
         pid = p[0]
         content = p[1]
         type = p[2]
+    '''TESTING'''
     print content
-    return render_template('pasteResults.html', pid=pid,content=content,type=type)
+    '''TESTING'''
+    domain = config["DOMAIN"]
+    return render_template('pasteResults.html', pid=pid,content=content,type=type,domain=domain)
 
 if __name__ == '__main__':
   app.run(
