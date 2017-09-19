@@ -5,20 +5,32 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/uploadStyle.css') }}">
 </head>
 <body>
-<form method="post" enctype="multipart/form-data" action="">
-  <span id="filename">Select your file</span>
-    <label for="file-upload">Browse<input type="file" id="file-upload"></label>
-</form>
+ {% block body %}
+<main class="view">
+        <h1 class="title">
+                August4th ~ File Share
+        </h1>
+    <form action="" id="form" name="fileForm" method="post" enctype="multipart/form-data" class="uploadForm">
+    <div id="uploadButton" class="uploadButton">
+      <p id="uploadText">
+        Click to select a file
+      </p>
+      <input id="file" type="file" name="file">
+    </div>
+    <input type="hidden" name="source" value="web">
+  </form>
+  </main>
+{% endblock %}
 </body>
 <script>
-$('#file-upload').change(function() {
-    var filepath = this.value;
-    var m = filepath.match(/([^\/\\]+)$/);
-    var filename = m[1];
-    $('#filename').html(filename);
-
-});
+  document.getElementById("file").onchange = function() {
+    document.getElementById("uploadText").innerHTML = "Uploading...";
+    var button = document.getElementById("uploadButton");
+    button.className = button.className + " uploading";
+    document.getElementById("form").submit();
+  };
 </script>
 </html>
