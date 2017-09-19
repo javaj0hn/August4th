@@ -18,6 +18,10 @@ Random ID Generator
 def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
 
+'''
+File Upload Whitelist
+'''
+
 # Routes
 '''
 Index Page
@@ -87,6 +91,15 @@ Paste Gallery
 def pasteGallery():
     pastes = db.getPasteGallery()
     return render_template('pasteGallery.html', pastes=pastes)
+
+'''
+About
+'''
+@app.route('/about')
+def about():
+    return render_template('about.html', page=config["SITE_DATA"])
+
+
 
 if __name__ == '__main__':
   app.run(
